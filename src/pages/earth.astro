@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ExhibitPlaque from "../components/ExhibitPlaque.astro";
+import { earthPaths } from "../data/earth-paths";
+
+const subtitle =
+  "Living systems, climate optimism, and our place on a biodiverse planet.";
+---
+
+<BaseLayout title="Earth & Ecology" description={subtitle} hideFooter>
+  <section class="hero-arrival biome-room earth-room page-enter" aria-label="Earth & Ecology">
+    <img
+      src="/images/earth-hero.png"
+      alt=""
+      class="hero-arrival__image earth-room__image"
+      loading="eager"
+    />
+
+    <div class="hero-arrival__title biome-room__copy">
+      <p class="biome-room__marker">Garden · Earth & Ecology</p>
+      <h1 class="biome-room__name">Earth & Ecology</h1>
+      <p class="hero-arrival__tagline biome-room__subtitle">{subtitle}</p>
+    </div>
+
+    <nav class="biome-room__path" aria-label="Paths through the conservatory">
+      <ul class="biome-room__path-list earth-room__path-list">
+        {
+          earthPaths.map((path) => (
+            <li>
+              <ExhibitPlaque num={path.num} title={path.title} hint={path.hint} />
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </section>
+</BaseLayout>

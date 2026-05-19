@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { biomes } from "../../data/biomes";
+
+export function getStaticPaths() {
+  return biomes.map((biome) => ({
+    params: { slug: biome.slug },
+    props: { biome },
+  }));
+}
+
+const { biome } = Astro.props;
+---
+
+<BaseLayout title={biome.title} description={biome.description}>
+  <div class="mx-auto max-w-2xl px-5 py-14">
+    <p class="text-[0.65rem] tracking-wider text-parchment-faint uppercase">
+      <a href="/#garden" class="hover:text-parchment-muted">Garden</a>
+      {" · Biome"}
+    </p>
+    <h1 class="mt-4 text-3xl">{biome.title}</h1>
+    <p class="mt-5 text-sm leading-relaxed text-parchment-muted">{biome.description}</p>
+    <p class="mt-3 text-sm italic text-parchment-faint">{biome.cardNote}</p>
+
+    <div class="mt-10 rounded-sm border border-parchment/10 bg-ink-card p-6">
+      <p class="text-sm text-parchment-muted">{biome.placeholder}</p>
+      <p class="mt-3 text-xs text-parchment-faint">
+        Seeds for this biome will appear in the archive as they are published.
+      </p>
+    </div>
+
+    <p class="mt-10 text-sm">
+      <a href="/#garden" class="text-accent hover:text-parchment">← Back to the garden</a>
+    </p>
+  </div>
+</BaseLayout>

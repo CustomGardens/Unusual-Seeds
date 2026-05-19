@@ -1,0 +1,32 @@
+﻿---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PathwayPlaque from "../components/PathwayPlaque.astro";
+import { pathways } from "../data/pathways";
+---
+
+<BaseLayout hideFooter>
+  <section class="hero-arrival" aria-label="Blue Hour Observatory">
+    <img
+      src="/images/hero.png"
+      alt=""
+      class="hero-arrival__image"
+      loading="eager"
+      fetchpriority="high"
+    />
+
+    <div class="hero-arrival__title">
+      <h1 class="hero-arrival__name">Unusual Seeds</h1>
+      <p class="hero-arrival__tagline">Ideas worth growing.</p>
+    </div>
+
+    <nav class="hero-arrival__pathways" aria-label="Garden pathways" id="garden">
+      <ul class="hero-arrival__pathway-list">
+        {pathways.map((pathway) => (
+          <li>
+            <PathwayPlaque pathway={pathway} />
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+</BaseLayout>

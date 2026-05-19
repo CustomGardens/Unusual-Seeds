@@ -1,0 +1,6 @@
+---
+pid: 22704
+cwd: |
+  C:\Unusual-Seeds
+---
+PS C:\Unusual-Seeds> 

@@ -1,0 +1,15 @@
+---
+interface Props {
+  num: string;
+  title: string;
+  hint?: string;
+}
+
+const { num, title, hint = "In preparation" } = Astro.props;
+---
+
+<div class="exhibit-plaque group" role="group" aria-label={`${num} ${title}`} tabindex="0">
+  <span class="exhibit-plaque__num">{num}</span>
+  <span class="exhibit-plaque__title">{title}</span>
+  <span class="exhibit-plaque__status" aria-hidden="true">{hint}</span>
+</div>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ExhibitPlaque from "../components/ExhibitPlaque.astro";
+import { rarePaths } from "../data/rare-paths";
+import { getBiome } from "../data/biomes";
+
+const biome = getBiome("rare-specimens")!;
+const subtitle =
+  "The universe is stranger than we usually allow ourselves to notice.";
+---
+
+<BaseLayout title={biome.title} description={subtitle} hideFooter>
+  <section class="hero-arrival biome-room rare-room page-enter" aria-label={biome.title}>
+    <img
+      src="/images/hero-conservatory.png"
+      alt=""
+      class="hero-arrival__image rare-room__image"
+      loading="eager"
+    />
+
+    <div class="hero-arrival__title biome-room__copy">
+      <p class="biome-room__marker">Garden · Rare Specimens</p>
+      <h1 class="biome-room__name">{biome.title}</h1>
+      <p class="hero-arrival__tagline biome-room__subtitle">{subtitle}</p>
+    </div>
+
+    <nav class="biome-room__path" aria-label="Paths through the archive">
+      <ul class="biome-room__path-list rare-room__path-list">
+        {
+          rarePaths.map((path) => (
+            <li>
+              <ExhibitPlaque num={path.num} title={path.title} hint={path.hint} />
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </section>
+</BaseLayout>

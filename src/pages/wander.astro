@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ExhibitPlaque from "../components/ExhibitPlaque.astro";
+import { wanderPaths } from "../data/wander-paths";
+
+const subtitle =
+  "Travel, places, perspective, beauty, and curiosity about the wider world.";
+---
+
+<BaseLayout title="Wander" description={subtitle} hideFooter>
+  <section class="hero-arrival biome-room wander-room page-enter" aria-label="Wander">
+    <img
+      src="/images/wander-hero.png"
+      alt=""
+      class="hero-arrival__image wander-room__image"
+      loading="eager"
+    />
+
+    <div class="hero-arrival__title biome-room__copy">
+      <p class="biome-room__marker">Garden · Wander</p>
+      <h1 class="biome-room__name">Wander</h1>
+      <p class="hero-arrival__tagline biome-room__subtitle">{subtitle}</p>
+    </div>
+
+    <nav class="biome-room__path" aria-label="Paths along the shore">
+      <ul class="biome-room__path-list wander-room__path-list">
+        {
+          wanderPaths.map((path) => (
+            <li>
+              <ExhibitPlaque num={path.num} title={path.title} hint={path.hint} />
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </section>
+</BaseLayout>

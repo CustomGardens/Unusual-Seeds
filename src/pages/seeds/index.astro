@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SeedCard from "../../components/SeedCard.astro";
+import { getCollection } from "astro:content";
+
+const seeds = (await getCollection("seeds"))
+  .filter((s) => !s.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Seeds" description="Essays and notes from the Unusual Seeds archive.">
+  <div class="mx-auto max-w-5xl px-5 py-14">
+    <p class="text-[0.7rem] tracking-[0.18em] text-parchment-faint uppercase">Archive</p>
+    <h1 class="mt-3 text-3xl">Seeds</h1>
+    <p class="mt-4 max-w-xl text-sm leading-relaxed text-parchment-muted">
+      Articles and essays — each an idea worth growing.
+    </p>
+
+    {
+      seeds.length === 0 ? (
+        <p class="mt-12 text-sm italic text-parchment-faint">
+          No seeds planted yet. Add a file to{" "}
+          <code class="text-parchment-muted">src/content/seeds/</code>.
+        </p>
+      ) : (
+        <ul class="mt-10 grid list-none gap-4 p-0 md:grid-cols-2">
+          {seeds.map((seed) => (
+            <li>
+              <SeedCard seed={seed} />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</BaseLayout>

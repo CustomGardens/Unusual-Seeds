@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getBiome } from "../data/biomes";
+
+interface Props {
+  seed: CollectionEntry<"seeds">;
+}
+
+const { seed } = Astro.props;
+const biome = getBiome(seed.data.biome);
+---
+
+<article class="rounded-sm border border-parchment/10 bg-ink-card p-5">
+  <p class="text-[0.65rem] tracking-wider text-parchment-faint uppercase">
+    {biome?.shortTitle ?? seed.data.biome}
+  </p>
+  <h3 class="mt-2 text-lg">
+    <a href={`/seeds/${seed.id}`} class="hover:text-parchment/90">
+      {seed.data.title}
+    </a>
+  </h3>
+  <p class="mt-2 text-sm leading-relaxed text-parchment-muted">
+    {seed.data.description}
+  </p>
+  <time
+    datetime={seed.data.pubDate.toISOString()}
+    class="mt-4 block text-xs text-parchment-faint"
+  >
+    {seed.data.pubDate.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })}
+  </time>
+</article>

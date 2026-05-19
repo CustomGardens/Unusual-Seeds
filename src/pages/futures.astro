@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ExhibitPlaque from "../components/ExhibitPlaque.astro";
+import { futuresPaths } from "../data/futures-paths";
+import { getBiome } from "../data/biomes";
+
+const biome = getBiome("conservatory-of-futures")!;
+const subtitle =
+  "Technology, intelligence, and the futures we are quietly building.";
+---
+
+<BaseLayout title={biome.title} description={subtitle} hideFooter>
+  <section
+    class="hero-arrival biome-room futures-room page-enter"
+    aria-label={biome.title}
+  >
+    <img
+      src="/images/hero-observatory.jpeg"
+      alt=""
+      class="hero-arrival__image futures-room__image"
+      loading="eager"
+    />
+
+    <div class="hero-arrival__title biome-room__copy">
+      <p class="biome-room__marker">Garden · Conservatory of Futures</p>
+      <h1 class="biome-room__name">{biome.title}</h1>
+      <p class="hero-arrival__tagline biome-room__subtitle">{subtitle}</p>
+    </div>
+
+    <nav class="biome-room__path" aria-label="Paths through the observatory">
+      <ul class="biome-room__path-list futures-room__path-list">
+        {
+          futuresPaths.map((path) => (
+            <li>
+              <ExhibitPlaque num={path.num} title={path.title} hint={path.hint} />
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </section>
+</BaseLayout>
