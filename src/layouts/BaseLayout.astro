@@ -1,8 +1,11 @@
 ---
+import { ClientRouter, fade } from "astro:transitions";
 import Nav from "../components/Nav.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { isImmersivePath } from "../data/immersive-pages";
 import "../styles/global.css";
+
+const conservatoryFade = fade({ duration: "550ms" });
 
 interface Props {
   title?: string;
@@ -22,8 +25,9 @@ const isImmersive = isImmersivePath(Astro.url.pathname);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:animate={conservatoryFade}>
   <head>
+    <ClientRouter />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
@@ -43,22 +47,8 @@ const isImmersive = isImmersivePath(Astro.url.pathname);
       <slot />
     </main>
     {!hideFooter && <SiteFooter />}
-    <script is:inline>
-      (function () {
-        if ("scrollRestoration" in history) {
-          history.scrollRestoration = "manual";
-        }
-        function scrollHomeToTop() {
-          var path = location.pathname.replace(/\/$/, "") || "/";
-          if (path === "/" && !location.hash) {
-            window.scrollTo(0, 0);
-          }
-        }
-        scrollHomeToTop();
-        window.addEventListener("pageshow", function () {
-          scrollHomeToTop();
-        });
-      })();
+    <script>
+      import "../scripts/conservatory-transitions.ts";
     </script>
   </body>
 </html>
