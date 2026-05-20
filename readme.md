@@ -1,4 +1,4 @@
-# Unusual Seeds
+Unusual Seeds
 
 **Ideas worth growing.**
 
@@ -9,6 +9,13 @@ Design intent is documented in [`docs/design-constitution.md`](docs/design-const
 ---
 
 ## Stack
+=======
+Unusual Seeds
+Ideas worth growing.
+Unusual Seeds
+
+Thoughtful ideas about the future, science fiction, nature, and the worlds we might grow.
+Planting ideas for tomorrow.
 
 | Piece | Role |
 |--------|------|
