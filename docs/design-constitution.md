@@ -343,7 +343,7 @@ Each biome is a **wing** of the garden. Tone escalates slightly from homepage to
 
 ### Global (quiet)
 
-- **Garden** — homepage pathways (`#garden`)
+- **Home** — full arrival hero (pathways retain `id="garden"` for deep links when needed)
 - **Seeds** — essay archive
 - **About** — only where context is needed; not homepage clutter
 

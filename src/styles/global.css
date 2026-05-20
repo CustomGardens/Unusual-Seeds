@@ -4,6 +4,8 @@
 
 @layer base {
   html {
+    min-height: 100svh;
+    min-height: 100dvh;
     @apply scroll-smooth antialiased;
   }
 
@@ -26,7 +28,9 @@
   /* —— Homepage: arrival (image is the character) —— */
 
   .hero-arrival {
-    @apply relative isolate min-h-[100dvh] w-full overflow-hidden bg-blue-hour-deep;
+    @apply relative isolate w-full overflow-hidden bg-blue-hour-deep;
+    min-height: 100svh;
+    min-height: 100dvh;
   }
 
   .hero-arrival__image {
@@ -56,7 +60,9 @@
 
   /* Title in the valley — left of dome, one-line observatory sign */
   .hero-arrival__title {
-    @apply relative z-10 flex min-h-[100dvh] max-w-xl flex-col items-start justify-end text-left;
+    @apply relative z-10 flex max-w-xl flex-col items-start justify-end text-left;
+    min-height: 100svh;
+    min-height: 100dvh;
     padding-top: 5rem;
     padding-bottom: clamp(7rem, 18vh, 10rem);
     padding-left: clamp(1.5rem, 14vw, 10rem);

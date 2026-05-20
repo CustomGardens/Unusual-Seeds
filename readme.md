@@ -1,51 +1,98 @@
-Unusual Seeds
+# Unusual Seeds
 
-Ideas worth growing.
+**Ideas worth growing.**
 
-Dark, immersive, calm.
+Static site for [unusual-seeds.com](https://unusual-seeds.com)—a calm, immersive “digital botanical garden.” The homepage invites; biome pages open into themed wings; articles live under **Seeds**.
 
-Unusual Seeds
+Design intent is documented in [`docs/design-constitution.md`](docs/design-constitution.md).
 
-Thoughtful ideas about the future, science fiction, nature, and the worlds we might grow.
+---
 
-Planting ideas for tomorrow.
+## Stack
 
-🌌 Future 
-Explaining what matters
+| Piece | Role |
+|--------|------|
+| [Astro](https://astro.build/) 5 | Static site, routing, MDX |
+| Tailwind CSS | Utilities (global styles in [`src/styles/global.css`](src/styles/global.css)) |
+| MDX | Seeds (essays under `src/content/seeds`) |
 
-📚 Science Fiction
-Books, shows, and ideas worth exploring.
+Requires **Node ≥ 18.17**.
 
-🌱 Nature & Planet
-Biology, climate optimism
+---
 
-🧭 Places & Wonder
-culture, beautiful things.
+## Scripts
 
-✨ Unusual Discoveries
-Interesting rabbit holes.
+```bash
+npm install
+npm run dev      # local dev server
+npm run build    # production build → dist/
+npm run preview  # preview the build
+npm run check    # astro check
+```
 
-Not bright utopian Apple ads.
+---
 
-Not grim dystopia.
+## Site map
 
-More:
+### Homepage
 
-quiet awe
+- **`/`** — Full-viewport arrival hero, pathway plaques to each wing (not traditional cards).
 
-Like:
+### Immersive biomes
 
-“humanity made it through and built something beautiful.”
+Full-bleed heroes, Roman-numeral (or numbered) exhibit plaques at the bottom, transparent header, no footer (`hideFooter`). Paths listed in [`src/data/pathways.ts`](src/data/pathways.ts).
 
-That’s actually a pretty distinctive aesthetic.
+| Wing | Route | Notes |
+|------|--------|------|
+| Futures | `/futures` | Observatory—systems, intelligence, futures |
+| Worlds | `/worlds` | Imagined worlds—numbered exhibits |
+| Earth | `/earth` | Earth & ecology—five ecological paths |
+| Wander | `/wander` | Travel, places, horizon |
+| Rare | `/rare` | Rare specimens—archive tone |
 
-A little:
+Legacy **`/biomes/[slug]`** URLs redirect to the routes above (see [`astro.config.mjs`](astro.config.mjs)).
 
-The Culture vibes
-Stargate Ancient civilization
-hopeful Foundation
-botanical-garden-on-an-alien-world
-Sagan wonder
-peaceful future
+### Interior (standard chrome)
 
- 
+| Route | Purpose |
+|--------|---------|
+| `/seeds` | Seed index |
+| `/seeds/...` | Individual MDX seeds |
+| `/about` | About |
+| `/404` | Not found |
+
+Biome metadata for placeholders and slugs: [`src/data/biomes.ts`](src/data/biomes.ts).
+
+---
+
+## Project layout
+
+```
+src/
+├── components/       # Nav, plaques, footer, etc.
+├── content/seeds/    # MDX content collection
+├── content.config.ts # Seeds collection schema
+├── data/             # pathways, biomes, immersive-pages, *-paths.ts per wing
+├── layouts/          # BaseLayout
+├── pages/            # Routes (*.astro)
+└── styles/global.css # Hero, biome rooms, pathways, plaques
+public/images/        # Hero art and assets
+docs/design-constitution.md
+```
+
+Immersion detection (transparent nav): [`src/data/immersive-pages.ts`](src/data/immersive-pages.ts).
+
+---
+
+## Content (Seeds)
+
+- Add MDX files under **`src/content/seeds/`**.
+- Follow the schema in **`src/content.config.ts`** (frontmatter for title, biome, dates, etc.).
+
+---
+
+## Philosophy (short)
+
+Slow discovery—not a SaaS landing page or hype blog. Each wing keeps **quiet optimism**, editorial typography, restrained motion, and **pathway plaques** rather than boxed UI.
+
+For authoritative tone and visual rules, read **[`docs/design-constitution.md`](docs/design-constitution.md)**.

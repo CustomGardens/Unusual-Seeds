@@ -15,7 +15,7 @@ const { biome } = Astro.props;
 <BaseLayout title={biome.title} description={biome.description}>
   <div class="mx-auto max-w-2xl px-5 py-14">
     <p class="text-[0.65rem] tracking-wider text-parchment-faint uppercase">
-      <a href="/#garden" class="hover:text-parchment-muted">Garden</a>
+      <a href="/" class="hover:text-parchment-muted">Home</a>
       {" · Biome"}
     </p>
     <h1 class="mt-4 text-3xl">{biome.title}</h1>
@@ -30,7 +30,7 @@ const { biome } = Astro.props;
     </div>
 
     <p class="mt-10 text-sm">
-      <a href="/#garden" class="text-accent hover:text-parchment">← Back to the garden</a>
+      <a href="/" class="text-accent hover:text-parchment">← Back home</a>
     </p>
   </div>
 </BaseLayout>

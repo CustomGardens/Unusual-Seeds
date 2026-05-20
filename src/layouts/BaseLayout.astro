@@ -37,11 +37,28 @@ const isImmersive = isImmersivePath(Astro.url.pathname);
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
   </head>
-  <body class="flex min-h-screen flex-col bg-ink">
+  <body class="flex min-h-[100svh] min-h-[100dvh] flex-col bg-ink overflow-x-hidden">
     <Nav />
-    <main class:list={["flex-1", isImmersive && "relative"]}>
+    <main class:list={["min-h-0 flex-1", isImmersive && "relative"]}>
       <slot />
     </main>
     {!hideFooter && <SiteFooter />}
+    <script is:inline>
+      (function () {
+        if ("scrollRestoration" in history) {
+          history.scrollRestoration = "manual";
+        }
+        function scrollHomeToTop() {
+          var path = location.pathname.replace(/\/$/, "") || "/";
+          if (path === "/" && !location.hash) {
+            window.scrollTo(0, 0);
+          }
+        }
+        scrollHomeToTop();
+        window.addEventListener("pageshow", function () {
+          scrollHomeToTop();
+        });
+      })();
+    </script>
   </body>
 </html>
