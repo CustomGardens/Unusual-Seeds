@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ExhibitPlaque from "../components/ExhibitPlaque.astro";
+import WingExhibits from "../components/WingExhibits.astro";
 import { rarePaths } from "../data/rare-paths";
 import { getBiome } from "../data/biomes";
 
@@ -24,16 +24,6 @@ const subtitle =
       <p class="hero-arrival__tagline biome-room__subtitle">{subtitle}</p>
     </div>
 
-    <nav class="biome-room__path" aria-label="Paths through the archive">
-      <ul class="biome-room__path-list rare-room__path-list">
-        {
-          rarePaths.map((path) => (
-            <li>
-              <ExhibitPlaque num={path.num} title={path.title} hint={path.hint} />
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+    <WingExhibits exhibits={rarePaths} label="Paths through the archive" />
   </section>
 </BaseLayout>

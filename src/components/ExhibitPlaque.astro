@@ -3,13 +3,27 @@ interface Props {
   num: string;
   title: string;
   hint?: string;
+  showHint?: boolean;
 }
 
-const { num, title, hint = "In preparation" } = Astro.props;
+const { num, title, hint = "In preparation", showHint = true } = Astro.props;
 ---
 
-<div class="exhibit-plaque group" role="group" aria-label={`${num} ${title}`} tabindex="0">
+<div
+  class="exhibit-plaque group"
+  role="group"
+  aria-label={`${num} ${title}`}
+  tabindex="0"
+>
   <span class="exhibit-plaque__num">{num}</span>
-  <span class="exhibit-plaque__title">{title}</span>
-  <span class="exhibit-plaque__status" aria-hidden="true">{hint}</span>
+  <span class="exhibit-plaque__body">
+    <span class="exhibit-plaque__title">{title}</span>
+    {
+      showHint && (
+        <span class="exhibit-plaque__status" aria-hidden="true">
+          {hint}
+        </span>
+      )
+    }
+  </span>
 </div>

@@ -1,15 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ExhibitPlaque from "../components/ExhibitPlaque.astro";
+import WingExhibits from "../components/WingExhibits.astro";
+import { worldsPaths } from "../data/worlds-paths";
 
 const subtitle =
   "Stories, futures, and imagined civilizations that help us understand our own world.";
-
-const exhibits = [
-  { num: "01", title: "Stargate Optimism" },
-  { num: "02", title: "Solarpunk Without the Costume" },
-  { num: "03", title: "The Future as a Place Worth Visiting" },
-];
 ---
 
 <BaseLayout title="House of Imagined Worlds" description={subtitle} hideFooter>
@@ -27,16 +22,6 @@ const exhibits = [
       <p class="hero-arrival__tagline biome-room__subtitle">{subtitle}</p>
     </div>
 
-    <nav class="biome-room__path" aria-label="Path through the wing">
-      <ul class="biome-room__path-list">
-        {
-          exhibits.map((exhibit) => (
-            <li>
-              <ExhibitPlaque num={exhibit.num} title={exhibit.title} />
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+    <WingExhibits exhibits={worldsPaths} label="Exhibits in this wing" />
   </section>
 </BaseLayout>

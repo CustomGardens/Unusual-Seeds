@@ -43,11 +43,11 @@ npm run check    # astro check
 
 ### Homepage
 
-- **`/`** — Full-viewport arrival hero, pathway plaques to each wing (not traditional cards).
+- **`/`** — Full-viewport arrival hero; persistent bottom **conservatory map** (Futures · Worlds · Earth · Wander · Rare).
 
 ### Immersive biomes
 
-Full-bleed heroes, Roman-numeral (or numbered) exhibit plaques at the bottom, transparent header, no footer (`hideFooter`). Paths listed in [`src/data/pathways.ts`](src/data/pathways.ts).
+Full-bleed heroes, exhibit labels in a right-side column (Roman numerals), shared bottom wing map, transparent header, no footer (`hideFooter`). Wing map: [`src/data/pathways.ts`](src/data/pathways.ts); per-wing exhibits: `*-paths.ts` files.
 
 | Wing | Route | Notes |
 |------|--------|------|

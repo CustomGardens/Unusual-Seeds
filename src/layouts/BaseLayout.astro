@@ -2,6 +2,7 @@
 import { ClientRouter, fade } from "astro:transitions";
 import Nav from "../components/Nav.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import WingMap from "../components/WingMap.astro";
 import { isImmersivePath } from "../data/immersive-pages";
 import "../styles/global.css";
 
@@ -22,6 +23,7 @@ const {
 const pageTitle = title === "Unusual Seeds" ? title : `${title} · Unusual Seeds`;
 const isHome = Astro.url.pathname === "/";
 const isImmersive = isImmersivePath(Astro.url.pathname);
+const immersivePath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
 <!doctype html>
@@ -46,6 +48,7 @@ const isImmersive = isImmersivePath(Astro.url.pathname);
     <main class:list={["min-h-0 flex-1", isImmersive && "relative"]}>
       <slot />
     </main>
+    {isImmersive && <WingMap currentPath={immersivePath} />}
     {!hideFooter && <SiteFooter />}
     <script>
       import "../scripts/conservatory-transitions.ts";

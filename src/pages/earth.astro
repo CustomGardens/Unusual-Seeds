@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ExhibitPlaque from "../components/ExhibitPlaque.astro";
+import WingExhibits from "../components/WingExhibits.astro";
 import { earthPaths } from "../data/earth-paths";
 
 const subtitle =
@@ -22,16 +22,6 @@ const subtitle =
       <p class="hero-arrival__tagline biome-room__subtitle">{subtitle}</p>
     </div>
 
-    <nav class="biome-room__path" aria-label="Paths through the conservatory">
-      <ul class="biome-room__path-list earth-room__path-list">
-        {
-          earthPaths.map((path) => (
-            <li>
-              <ExhibitPlaque num={path.num} title={path.title} hint={path.hint} />
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+    <WingExhibits exhibits={earthPaths} label="Paths through the conservatory" />
   </section>
 </BaseLayout>

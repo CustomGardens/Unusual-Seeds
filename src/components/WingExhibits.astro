@@ -1,0 +1,33 @@
+---
+import ExhibitPlaque from "./ExhibitPlaque.astro";
+
+export interface Exhibit {
+  num: string;
+  title: string;
+  hint?: string;
+}
+
+interface Props {
+  exhibits: Exhibit[];
+  label: string;
+}
+
+const { exhibits, label } = Astro.props;
+---
+
+<aside class="wing-exhibits" aria-label={label}>
+  <ol class="wing-exhibits__list">
+    {
+      exhibits.map((exhibit) => (
+        <li>
+          <ExhibitPlaque
+            num={exhibit.num}
+            title={exhibit.title}
+            hint={exhibit.hint}
+            showHint={false}
+          />
+        </li>
+      ))
+    }
+  </ol>
+</aside>

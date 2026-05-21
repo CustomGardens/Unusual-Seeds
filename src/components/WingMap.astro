@@ -1,0 +1,35 @@
+---
+import { pathways, pathwayHref } from "../data/pathways";
+
+interface Props {
+  /** Normalized path, e.g. `/worlds` or `/` */
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const path = currentPath.replace(/\/$/, "") || "/";
+const isHome = path === "/";
+---
+
+<nav class="wing-map" aria-label="Conservatory map" id="garden">
+  <ul class="wing-map__list">
+    {
+      pathways.map((pathway) => {
+        const href = pathwayHref(pathway);
+        const wingPath = href.replace(/\/$/, "") || "/";
+        const isCurrent = !isHome && wingPath === path;
+        return (
+          <li>
+            <a
+              href={href}
+              class:list={["wing-map__link", isCurrent && "wing-map__link--current"]}
+              aria-current={isCurrent ? "page" : undefined}
+            >
+              {pathway.label}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

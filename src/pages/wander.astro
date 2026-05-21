@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ExhibitPlaque from "../components/ExhibitPlaque.astro";
+import WingExhibits from "../components/WingExhibits.astro";
 import { wanderPaths } from "../data/wander-paths";
 
 const subtitle =
@@ -22,16 +22,6 @@ const subtitle =
       <p class="hero-arrival__tagline biome-room__subtitle">{subtitle}</p>
     </div>
 
-    <nav class="biome-room__path" aria-label="Paths along the shore">
-      <ul class="biome-room__path-list wander-room__path-list">
-        {
-          wanderPaths.map((path) => (
-            <li>
-              <ExhibitPlaque num={path.num} title={path.title} hint={path.hint} />
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+    <WingExhibits exhibits={wanderPaths} label="Paths along the shore" />
   </section>
 </BaseLayout>

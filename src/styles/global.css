@@ -79,52 +79,86 @@
     text-shadow: 0 1px 10px rgba(8, 12, 18, 0.3);
   }
 
-  .hero-arrival__pathways {
-    @apply absolute inset-x-0 bottom-0 z-10 px-4 pb-6 pt-10 md:px-8 md:pb-7;
-    background: linear-gradient(
-      0deg,
-      rgba(12, 18, 25, 0.55) 0%,
-      rgba(12, 18, 25, 0.22) 45%,
-      transparent 100%
-    );
+  /* —— Conservatory map (persistent bottom wing navigation) —— */
+
+  .wing-map {
+    @apply pointer-events-none fixed inset-x-0 bottom-0 z-20;
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
   }
 
-  .hero-arrival__pathway-list {
-    @apply mx-auto flex max-w-5xl list-none flex-wrap items-end justify-center gap-x-10 gap-y-3 p-0 md:gap-x-16 lg:gap-x-[5.25rem];
+  .wing-map__list {
+    @apply pointer-events-auto mx-auto flex list-none flex-wrap items-center justify-center p-0;
+    gap: clamp(1.25rem, 5vw, 3.5rem);
   }
 
-  /* Garden plaque — not a button or card */
-  .pathway-plaque {
-    @apply flex min-w-[3.75rem] flex-col items-center gap-1 px-0.5 py-0.5 text-center no-underline;
-    @apply transition-[opacity,transform] duration-300 ease-out;
+  .wing-map__link {
+    @apply font-serif text-[0.78rem] font-normal tracking-[0.16em] text-parchment no-underline;
+    opacity: 0.4;
+    text-shadow: 0 1px 12px rgba(8, 12, 18, 0.55);
+    @apply transition-[opacity,filter] duration-300 ease-out;
   }
 
-  .pathway-plaque:hover,
-  .pathway-plaque:focus-visible {
+  .wing-map__link:hover,
+  .wing-map__link:focus-visible {
+    @apply outline-none opacity-70;
+  }
+
+  .wing-map__link--current,
+  .wing-map__link[aria-current="page"] {
+    opacity: 0.92;
+    filter: brightness(1.12);
+  }
+
+  /* —— Wing exhibits (right column, biome pages only) —— */
+
+  .wing-exhibits {
+    @apply pointer-events-none absolute right-0 top-1/2 z-10 -translate-y-1/2;
+    padding-right: clamp(1.25rem, 4vw, 3.5rem);
+    max-width: min(14rem, 32vw);
+  }
+
+  .wing-exhibits__list {
+    @apply pointer-events-auto flex list-none flex-col p-0;
+    gap: clamp(1.35rem, 3.5vh, 2.25rem);
+  }
+
+  .wing-exhibits .exhibit-plaque {
+    @apply flex-row items-start gap-3 py-0.5;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .wing-exhibits .exhibit-plaque__num {
+    @apply min-w-[1.35rem] shrink-0 text-[0.7rem] tracking-[0.08em] text-window-glow/80;
+    text-shadow: 0 0 12px rgba(232, 196, 122, 0.15);
+  }
+
+  .wing-exhibits .exhibit-plaque__body {
+    @apply flex min-w-0 flex-col gap-0.5;
+  }
+
+  .wing-exhibits .exhibit-plaque__title {
+    @apply text-[0.8rem] leading-snug tracking-[0.02em] text-parchment/55;
+  }
+
+  .wing-exhibits .exhibit-plaque:hover,
+  .wing-exhibits .exhibit-plaque:focus-within {
     @apply outline-none;
   }
 
-  .pathway-plaque__label {
-    @apply font-serif text-[0.82rem] font-normal tracking-[0.15em] text-parchment/60 md:text-[0.88rem];
-    text-shadow: 0 1px 10px rgba(8, 12, 18, 0.55);
-    @apply transition-all duration-300 ease-out;
+  .wing-exhibits .exhibit-plaque:hover .exhibit-plaque__num,
+  .wing-exhibits .exhibit-plaque:focus-within .exhibit-plaque__num {
+    @apply text-window-glow/95;
+    text-shadow: 0 0 14px rgba(232, 196, 122, 0.2);
   }
 
-  .pathway-plaque:hover .pathway-plaque__label,
-  .pathway-plaque:focus-visible .pathway-plaque__label {
-    @apply rounded-sm bg-ink/15 px-2 py-0.5 text-parchment/90 backdrop-blur-md;
-    box-shadow: 0 0 0 1px rgb(230 226 216 / 0.1);
-  }
-
-  .pathway-plaque__hint {
-    @apply max-h-0 overflow-hidden text-[0.58rem] font-normal tracking-[0.06em] text-parchment-muted/70 opacity-0;
-    @apply transition-all duration-300 ease-out;
-    text-shadow: 0 1px 6px rgba(8, 12, 18, 0.65);
-  }
-
-  .pathway-plaque:hover .pathway-plaque__hint,
-  .pathway-plaque:focus-visible .pathway-plaque__hint {
-    @apply max-h-6 opacity-100;
+  .wing-exhibits .exhibit-plaque:hover .exhibit-plaque__title,
+  .wing-exhibits .exhibit-plaque:focus-within .exhibit-plaque__title {
+    @apply text-parchment/85;
+    text-shadow: 0 0 16px rgba(232, 196, 122, 0.08), 0 1px 10px rgba(8, 12, 18, 0.45);
+    transform: translateY(-1px);
   }
 
   .article-content :where(p) {
@@ -217,11 +251,16 @@
   }
 
   .biome-room__copy {
-    padding-bottom: clamp(13rem, 30vh, 15.5rem);
+    padding-bottom: clamp(5.5rem, 14vh, 7rem);
+    padding-right: clamp(2rem, 22vw, 12rem);
+  }
+
+  .hero-arrival:not(.biome-room) .hero-arrival__title {
+    padding-bottom: clamp(5.5rem, 14vh, 7rem);
   }
 
   .biome-room .hero-arrival__title {
-    padding-bottom: clamp(6.25rem, 16vh, 9rem);
+    padding-bottom: clamp(5.5rem, 14vh, 7rem);
   }
 
   .biome-room__marker {
@@ -238,212 +277,37 @@
     @apply mt-4 max-w-md pb-6 text-parchment/55;
   }
 
-  .biome-room__path {
-    @apply absolute inset-x-0 bottom-0 z-10 pb-7 pt-14 md:pb-8;
-    padding-left: clamp(1.5rem, 14vw, 10rem);
-    padding-right: clamp(1.25rem, 6vw, 4rem);
-    background: linear-gradient(
-      0deg,
-      rgba(12, 18, 25, 0.55) 0%,
-      rgba(12, 18, 25, 0.18) 48%,
-      transparent 100%
-    );
-  }
-
-  .biome-room__path-list {
-    @apply flex list-none flex-wrap items-end gap-y-5 p-0;
-    gap: 0 clamp(2rem, 7vw, 5.5rem);
-  }
-
-  .biome-room__path-list > li {
-    @apply flex items-end;
-  }
-
-  .biome-room__path-list > li + li {
-    @apply border-l border-parchment/10;
-    padding-left: clamp(1.75rem, 5vw, 4rem);
-    margin-left: clamp(1.25rem, 4vw, 3rem);
-  }
-
-  /* Portrait: shared exhibit-map rhythm (arc grid, calm placard spacing) */
+  /* Portrait: exhibits + copy blocking */
   @media (orientation: portrait) and (max-width: 1024px) {
-    .biome-room .hero-arrival__title {
-      padding-bottom: clamp(5.5rem, 14vh, 8rem);
+    .wing-map__list {
+      gap: clamp(0.85rem, 3.5vw, 1.75rem);
     }
 
-    .biome-room .biome-room__copy {
-      padding-bottom: clamp(10rem, 24vh, 13rem);
+    .wing-map__link {
+      @apply text-[0.72rem];
     }
 
-    .biome-room .biome-room__path {
-      @apply pb-10 pt-[4.25rem];
+    .wing-exhibits {
+      @apply right-auto top-auto bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] left-auto w-auto max-w-[min(100%,18rem)] -translate-y-0;
+      padding-right: 0;
       padding-left: clamp(1.25rem, 5vw, 2.25rem);
-      padding-right: clamp(1rem, 4vw, 1.75rem);
-      background: linear-gradient(
-        0deg,
-        rgba(12, 18, 25, 0.66) 0%,
-        rgba(12, 18, 25, 0.34) 40%,
-        rgba(12, 18, 25, 0.07) 65%,
-        transparent 100%
-      );
     }
 
-    .biome-room .biome-room__path-list > li,
-    .biome-room .biome-room__path-list > li + li {
-      @apply border-0 p-0 m-0;
+    .wing-exhibits__list {
+      gap: clamp(1rem, 2.5vh, 1.5rem);
     }
 
-    .biome-room .exhibit-plaque {
-      @apply min-w-0 max-w-none gap-1.5 py-1;
+    .biome-room__copy {
+      padding-bottom: clamp(8.5rem, 20vh, 10rem);
+      padding-right: clamp(1.25rem, 5vw, 2.25rem);
     }
 
-    .biome-room .exhibit-plaque__num {
-      @apply text-parchment-faint/70;
-      text-shadow:
-        0 1px 10px rgba(8, 12, 18, 0.65),
-        0 0 12px rgba(12, 18, 25, 0.35);
-    }
-
-    .biome-room .exhibit-plaque__title {
-      @apply text-[0.82rem] leading-snug text-parchment/75;
-      text-shadow:
-        0 1px 14px rgba(8, 12, 18, 0.7),
-        0 0 20px rgba(12, 18, 25, 0.4);
-    }
-
-    .biome-room .exhibit-plaque__status {
-      @apply text-parchment-faint/80;
-    }
-
-    /* Five markers: soft arc — outer wings high, center dips, pair closes the map */
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      grid-template-rows: auto auto;
-      align-items: end;
-      gap: clamp(1.35rem, 3.5vh, 2rem) clamp(0.75rem, 2.5vw, 1.25rem);
-      max-width: 36rem;
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) > li:nth-child(1) {
-      grid-column: 1 / 5;
-      grid-row: 1;
-      justify-self: start;
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) > li:nth-child(2) {
-      grid-column: 5 / 9;
-      grid-row: 1;
-      justify-self: start;
-      transform: translateY(0.3rem);
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) > li:nth-child(3) {
-      grid-column: 9 / 13;
-      grid-row: 1;
-      justify-self: end;
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) > li:nth-child(4) {
-      grid-column: 2 / 7;
-      grid-row: 2;
-      justify-self: start;
-      transform: translateY(-0.12rem);
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) > li:nth-child(5) {
-      grid-column: 7 / 12;
-      grid-row: 2;
-      justify-self: end;
-      transform: translateY(0.12rem);
-    }
-
-    /* Worlds wing: three markers, quieter horizontal rhythm */
-    .biome-room .biome-room__path-list:not(:has(li:nth-child(5))) {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      align-items: end;
-      gap: clamp(1.25rem, 3vw, 1.75rem);
-      max-width: 30rem;
-    }
-
-    .biome-room .biome-room__path-list:not(:has(li:nth-child(5))) > li:nth-child(1) {
-      grid-column: 1 / 5;
-      justify-self: start;
-    }
-
-    .biome-room .biome-room__path-list:not(:has(li:nth-child(5))) > li:nth-child(2) {
-      grid-column: 5 / 9;
-      justify-self: start;
-      transform: translateY(0.4rem);
-    }
-
-    .biome-room .biome-room__path-list:not(:has(li:nth-child(5))) > li:nth-child(3) {
-      grid-column: 9 / 13;
-      justify-self: end;
-    }
-  }
-
-  @media (orientation: portrait) and (max-width: 480px) {
-    .biome-room .biome-room__copy {
-      padding-bottom: clamp(10.5rem, 26vh, 13.5rem);
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) {
-      grid-template-rows: auto auto auto;
-      gap: clamp(1.35rem, 4vh, 2rem) clamp(0.5rem, 2vw, 1rem);
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) > li:nth-child(1) {
-      grid-column: 1 / 7;
-      grid-row: 1;
-      transform: none;
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) > li:nth-child(2) {
-      grid-column: 7 / 13;
-      grid-row: 1;
-      justify-self: end;
-      transform: translateY(0.35rem);
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) > li:nth-child(3) {
-      grid-column: 3 / 11;
-      grid-row: 2;
-      justify-self: center;
-      transform: none;
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) > li:nth-child(4) {
-      grid-column: 1 / 7;
-      grid-row: 3;
-      transform: none;
-    }
-
-    .biome-room .biome-room__path-list:has(li:nth-child(5)) > li:nth-child(5) {
-      grid-column: 7 / 13;
-      grid-row: 3;
-      justify-self: end;
-      transform: translateY(0.15rem);
-    }
-  }
-
-  /* Portrait focal points + copy blocking (cinematography, not template lock) */
-  @media (orientation: portrait) and (max-width: 1024px) {
     .worlds-room__image {
       object-position: center 38%;
     }
 
-    .worlds-room .biome-room__copy {
-      padding-bottom: clamp(10.25rem, 24.5vh, 13.25rem);
-    }
-
     .earth-room__image {
       object-position: center 46%;
-    }
-
-    .earth-room .biome-room__copy {
-      padding-bottom: clamp(10.25rem, 25vh, 13.25rem);
     }
 
     .wander-room__image {
@@ -454,69 +318,32 @@
       padding-left: clamp(1.75rem, 8vw, 3rem);
     }
 
-    .wander-room .biome-room__copy {
-      padding-bottom: clamp(9.75rem, 23.5vh, 12.75rem);
-    }
-
     .futures-room__image {
       object-position: center 30%;
-    }
-
-    .futures-room .biome-room__copy {
-      padding-bottom: clamp(9.5rem, 22vh, 12.5rem);
     }
 
     .rare-room__image {
       object-position: center 36%;
     }
-
-    .rare-room .biome-room__copy {
-      padding-bottom: clamp(9.25rem, 21vh, 12rem);
-    }
   }
 
   @media (orientation: portrait) and (max-width: 480px) {
-    .earth-room .biome-room__copy {
-      padding-bottom: clamp(10.75rem, 26.5vh, 13.75rem);
-    }
-
-    .wander-room .biome-room__copy {
-      padding-bottom: clamp(10.25rem, 25.5vh, 13.25rem);
-    }
-
-    .futures-room .biome-room__copy {
-      padding-bottom: clamp(10rem, 24vh, 13rem);
-    }
-
-    .rare-room .biome-room__copy {
-      padding-bottom: clamp(9.75rem, 23vh, 12.75rem);
+    .wing-exhibits {
+      bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px));
+      max-width: 16rem;
     }
   }
 
-  /* Landscape: subtle per-wing copy lift */
   @media (orientation: landscape) {
-    .worlds-room .biome-room__copy {
-      padding-bottom: clamp(12.75rem, 31vh, 15.25rem);
-    }
-
-    .earth-room .biome-room__copy {
-      padding-bottom: clamp(13rem, 30vh, 15.5rem);
-    }
-
     .wander-room .hero-arrival__title {
       padding-left: clamp(2rem, 12vw, 9rem);
     }
+  }
 
-    .wander-room .biome-room__copy {
-      padding-bottom: clamp(12.5rem, 29vh, 15rem);
-    }
-
-    .futures-room .biome-room__copy {
-      padding-bottom: clamp(12.25rem, 28vh, 14.75rem);
-    }
-
-    .rare-room .biome-room__copy {
-      padding-bottom: clamp(12rem, 27vh, 14.5rem);
+  @media (prefers-reduced-motion: reduce) {
+    .wing-exhibits .exhibit-plaque:hover .exhibit-plaque__title,
+    .wing-exhibits .exhibit-plaque:focus-within .exhibit-plaque__title {
+      transform: none;
     }
   }
 
@@ -564,22 +391,13 @@
     animation: none;
   }
 
-  .earth-room .biome-room__path {
-    background: linear-gradient(
-      0deg,
-      rgba(12, 18, 25, 0.56) 0%,
-      rgba(12, 18, 25, 0.2) 50%,
-      transparent 100%
-    );
-  }
-
-  .earth-room .exhibit-plaque:hover .exhibit-plaque__num,
-  .earth-room .exhibit-plaque:focus-within .exhibit-plaque__num {
+  .earth-room .wing-exhibits .exhibit-plaque:hover .exhibit-plaque__num,
+  .earth-room .wing-exhibits .exhibit-plaque:focus-within .exhibit-plaque__num {
     text-shadow: 0 0 14px rgba(196, 220, 160, 0.14);
   }
 
-  .earth-room .exhibit-plaque:hover .exhibit-plaque__title,
-  .earth-room .exhibit-plaque:focus-within .exhibit-plaque__title {
+  .earth-room .wing-exhibits .exhibit-plaque:hover .exhibit-plaque__title,
+  .earth-room .wing-exhibits .exhibit-plaque:focus-within .exhibit-plaque__title {
     text-shadow: 0 0 16px rgba(196, 220, 160, 0.08), 0 1px 10px rgba(8, 12, 18, 0.45);
   }
 
@@ -640,24 +458,6 @@
     background: radial-gradient(ellipse 100% 70% at 50% 100%, rgba(18, 32, 52, 0.25), transparent 65%);
   }
 
-  .wander-room .biome-room__path {
-    background: linear-gradient(
-      0deg,
-      rgba(12, 18, 25, 0.56) 0%,
-      rgba(12, 18, 25, 0.2) 50%,
-      transparent 100%
-    );
-  }
-
-  .wander-room .exhibit-plaque:hover .exhibit-plaque__num,
-  .wander-room .exhibit-plaque:focus-within .exhibit-plaque__num {
-    text-shadow: 0 0 14px rgba(232, 196, 122, 0.14);
-  }
-
-  .wander-room .exhibit-plaque:hover .exhibit-plaque__title,
-  .wander-room .exhibit-plaque:focus-within .exhibit-plaque__title {
-    text-shadow: 0 0 16px rgba(232, 196, 122, 0.1), 0 1px 10px rgba(8, 12, 18, 0.45);
-  }
 
   @media (prefers-reduced-motion: no-preference) {
     .wander-room.hero-arrival::after {
@@ -707,24 +507,6 @@
     background: radial-gradient(ellipse 100% 75% at 50% 0%, rgba(26, 40, 64, 0.2), transparent 60%);
   }
 
-  .futures-room .biome-room__path {
-    background: linear-gradient(
-      0deg,
-      rgba(12, 18, 25, 0.56) 0%,
-      rgba(12, 18, 25, 0.2) 50%,
-      transparent 100%
-    );
-  }
-
-  .futures-room .exhibit-plaque:hover .exhibit-plaque__num,
-  .futures-room .exhibit-plaque:focus-within .exhibit-plaque__num {
-    text-shadow: 0 0 14px rgba(220, 228, 240, 0.12);
-  }
-
-  .futures-room .exhibit-plaque:hover .exhibit-plaque__title,
-  .futures-room .exhibit-plaque:focus-within .exhibit-plaque__title {
-    text-shadow: 0 0 16px rgba(232, 196, 122, 0.1), 0 1px 10px rgba(8, 12, 18, 0.45);
-  }
 
   @media (prefers-reduced-motion: no-preference) {
     .futures-room.hero-arrival::before {
@@ -770,24 +552,6 @@
     background: radial-gradient(ellipse 90% 70% at 55% 55%, rgba(32, 28, 44, 0.28), transparent 65%);
   }
 
-  .rare-room .biome-room__path {
-    background: linear-gradient(
-      0deg,
-      rgba(12, 18, 25, 0.56) 0%,
-      rgba(12, 18, 25, 0.2) 50%,
-      transparent 100%
-    );
-  }
-
-  .rare-room .exhibit-plaque:hover .exhibit-plaque__num,
-  .rare-room .exhibit-plaque:focus-within .exhibit-plaque__num {
-    text-shadow: 0 0 14px rgba(232, 196, 122, 0.16);
-  }
-
-  .rare-room .exhibit-plaque:hover .exhibit-plaque__title,
-  .rare-room .exhibit-plaque:focus-within .exhibit-plaque__title {
-    text-shadow: 0 0 16px rgba(232, 196, 122, 0.12), 0 1px 10px rgba(8, 12, 18, 0.45);
-  }
 
   @media (prefers-reduced-motion: no-preference) {
     .rare-room.hero-arrival::after {
@@ -795,43 +559,24 @@
     }
   }
 
-  /* Exhibit plaque — path marker, not content block */
+  /* Exhibit plaque — museum label (wing column) */
   .exhibit-plaque {
-    @apply flex min-w-[6.5rem] max-w-[11rem] flex-col items-start gap-1 px-0.5 py-0.5 text-left;
-    @apply transition-[opacity] duration-300 ease-out;
+    @apply flex cursor-default items-start gap-1 px-0.5 py-0.5 text-left outline-none;
+    @apply transition-[opacity,transform] duration-300 ease-out;
   }
 
   .exhibit-plaque__num {
-    @apply font-serif text-[0.65rem] tracking-[0.12em] text-parchment-faint/55;
-    text-shadow: 0 1px 8px rgba(8, 12, 18, 0.45);
+    @apply font-serif tracking-[0.08em];
     @apply transition-[color,text-shadow] duration-300 ease-out;
   }
 
   .exhibit-plaque__title {
-    @apply font-serif text-[0.8rem] leading-snug tracking-[0.04em] text-parchment/60 md:text-[0.85rem];
-    text-shadow: 0 1px 10px rgba(8, 12, 18, 0.5);
-    @apply transition-[color,text-shadow] duration-300 ease-out;
+    @apply font-serif leading-snug;
+    @apply transition-[color,text-shadow,transform] duration-300 ease-out;
   }
 
   .exhibit-plaque__status {
     @apply max-h-0 overflow-hidden text-[0.58rem] italic tracking-wide text-parchment-faint/70 opacity-0;
     @apply transition-all duration-300 ease-out;
-  }
-
-  .exhibit-plaque:hover .exhibit-plaque__num,
-  .exhibit-plaque:focus-within .exhibit-plaque__num {
-    @apply text-parchment-faint/75;
-    text-shadow: 0 0 14px rgba(232, 196, 122, 0.12);
-  }
-
-  .exhibit-plaque:hover .exhibit-plaque__title,
-  .exhibit-plaque:focus-within .exhibit-plaque__title {
-    @apply text-parchment/70;
-    text-shadow: 0 0 18px rgba(232, 196, 122, 0.1), 0 1px 10px rgba(8, 12, 18, 0.45);
-  }
-
-  .exhibit-plaque:hover .exhibit-plaque__status,
-  .exhibit-plaque:focus-within .exhibit-plaque__status {
-    @apply max-h-5 opacity-100;
   }
 }
