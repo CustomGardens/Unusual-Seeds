@@ -24,7 +24,7 @@ export const biomes: Biome[] = [
     title: "Conservatory of Futures",
     shortTitle: "Futures",
     description:
-      "Technology, intelligence, and the choices shaping tomorrow — explained with clarity.",
+      "Technology, intelligence, and the futures quietly taking shape.",
     cardNote: "Forecasting without spectacle.",
     placeholder:
       "Essays and notes on future thinking — without hype or doom.",
@@ -32,9 +32,9 @@ export const biomes: Biome[] = [
   {
     slug: "house-of-imagined-worlds",
     title: "House of Imagined Worlds",
-    shortTitle: "Fiction",
+    shortTitle: "Worlds",
     description:
-      "Science fiction and imagined civilizations that help us see our own world.",
+      "Imagined worlds, strange futures, and stories that help us understand our own.",
     cardNote: "Maps of worlds that never were.",
     placeholder:
       "Books, shows, and ideas worth exploring from imagined futures.",
@@ -42,19 +42,19 @@ export const biomes: Biome[] = [
   {
     slug: "earth-and-ecology",
     title: "Earth & Ecology",
-    shortTitle: "Ecology",
+    shortTitle: "Earth",
     description:
-      "Living systems, climate optimism, and our place on a biodiverse planet.",
+      "Living systems, cautious climate optimism, and our place on a living planet.",
     cardNote: "Field notes from a world still being understood.",
     placeholder:
       "Nature writing grounded in curiosity and care.",
   },
   {
     slug: "wonder-and-wander",
-    title: "Wonder & Wander",
-    shortTitle: "Wonder",
+    title: "Wander",
+    shortTitle: "Wander",
     description:
-      "Places, cultures, and journeys that restore a sense of scale.",
+      "Travel, places, perspective, beauty, and curiosity about the wider world.",
     cardNote: "Coordinates for the curious.",
     placeholder:
       "Journeys and discoveries from the edges of the map.",
@@ -62,9 +62,9 @@ export const biomes: Biome[] = [
   {
     slug: "rare-specimens",
     title: "Rare Specimens",
-    shortTitle: "Specimens",
+    shortTitle: "Rare",
     description:
-      "Unusual ideas, rabbit holes, and discoveries from the margins.",
+      "The universe is stranger than we usually allow ourselves to notice.",
     cardNote: "Catalogued for the archive.",
     placeholder:
       "Curious finds worth preserving in the archive.",

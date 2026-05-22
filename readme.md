@@ -49,13 +49,13 @@ npm run check    # astro check
 
 Full-bleed heroes, exhibit labels in a right-side column (Roman numerals), shared bottom wing map, transparent header, no footer (`hideFooter`). Wing map: [`src/data/pathways.ts`](src/data/pathways.ts); per-wing exhibits: `*-paths.ts` files.
 
-| Wing | Route | Notes |
-|------|--------|------|
-| Futures | `/futures` | Observatory—systems, intelligence, futures |
-| Worlds | `/worlds` | Imagined worlds—numbered exhibits |
-| Earth | `/earth` | Earth & ecology—five ecological paths |
+| Biome | Route | Notes |
+|--------|--------|------|
+| Futures | `/futures` | Conservatory of Futures |
+| Worlds | `/worlds` | House of Imagined Worlds |
+| Earth | `/earth` | Earth & Ecology |
 | Wander | `/wander` | Travel, places, horizon |
-| Rare | `/rare` | Rare specimens—archive tone |
+| Rare | `/rare` | Rare Specimens |
 
 Legacy **`/biomes/[slug]`** URLs redirect to the routes above (see [`astro.config.mjs`](astro.config.mjs)).
 
