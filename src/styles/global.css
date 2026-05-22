@@ -89,15 +89,22 @@
   }
 
   .wing-map__list {
-    @apply pointer-events-auto mx-auto flex list-none flex-wrap items-center justify-center p-0;
-    gap: clamp(1.25rem, 5vw, 3.5rem);
+    @apply pointer-events-auto mx-auto grid w-full max-w-6xl list-none items-end p-0;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    padding-left: max(2.75rem, calc(env(safe-area-inset-left, 0px) + clamp(2rem, 9vw, 4.5rem)));
+    padding-right: max(2.75rem, calc(env(safe-area-inset-right, 0px) + clamp(2rem, 9vw, 4.5rem)));
+  }
+
+  .wing-map__list > li {
+    justify-self: center;
   }
 
   .wing-map__link {
     @apply font-serif text-[0.78rem] font-normal tracking-[0.16em] text-parchment no-underline;
     opacity: 0.4;
-    text-shadow: 0 1px 12px rgba(8, 12, 18, 0.55);
+    text-shadow: 0 1px 14px rgba(8, 12, 18, 0.65);
     @apply transition-[opacity,filter] duration-300 ease-out;
+    white-space: nowrap;
   }
 
   .wing-map__link:hover,
@@ -114,9 +121,25 @@
   /* —— Wing exhibits (right column, biome pages only) —— */
 
   .wing-exhibits {
-    @apply pointer-events-none absolute right-0 top-1/2 z-10 -translate-y-1/2;
+    @apply pointer-events-none absolute right-0 top-1/2 isolate z-10 -translate-y-1/2;
     padding-right: clamp(1.25rem, 4vw, 3.5rem);
     max-width: min(14rem, 32vw);
+  }
+
+  /* Invisible local contrast — readable on bright greenhouse detail */
+  .wing-exhibits::before {
+    content: "";
+    @apply pointer-events-none absolute -z-10;
+    top: -0.75rem;
+    bottom: -0.75rem;
+    right: -0.5rem;
+    left: -3.5rem;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(8, 12, 18, 0.1) 30%,
+      rgba(8, 12, 18, 0.26) 100%
+    );
   }
 
   .wing-exhibits__list {
@@ -131,8 +154,12 @@
   }
 
   .wing-exhibits .exhibit-plaque__num {
-    @apply min-w-[1.35rem] shrink-0 text-[0.7rem] tracking-[0.08em] text-window-glow/80;
-    text-shadow: 0 0 12px rgba(232, 196, 122, 0.15);
+    @apply min-w-[1.35rem] shrink-0 text-[0.7rem] tracking-[0.08em] text-window-glow/90;
+    text-shadow:
+      0 1px 8px rgba(8, 12, 18, 0.88),
+      0 0 14px rgba(8, 12, 18, 0.5),
+      0 0 12px rgba(232, 196, 122, 0.14);
+    @apply transition-[color,text-shadow] duration-300 ease-out;
   }
 
   .wing-exhibits .exhibit-plaque__body {
@@ -140,7 +167,12 @@
   }
 
   .wing-exhibits .exhibit-plaque__title {
-    @apply text-[0.8rem] leading-snug tracking-[0.02em] text-parchment/55;
+    @apply text-[0.8rem] leading-snug tracking-[0.02em] text-parchment/70;
+    text-shadow:
+      0 1px 10px rgba(8, 12, 18, 0.92),
+      0 1px 20px rgba(8, 12, 18, 0.7),
+      0 0 24px rgba(8, 12, 18, 0.38);
+    @apply transition-[color,text-shadow,transform] duration-300 ease-out;
   }
 
   .wing-exhibits .exhibit-plaque:hover,
@@ -150,14 +182,19 @@
 
   .wing-exhibits .exhibit-plaque:hover .exhibit-plaque__num,
   .wing-exhibits .exhibit-plaque:focus-within .exhibit-plaque__num {
-    @apply text-window-glow/95;
-    text-shadow: 0 0 14px rgba(232, 196, 122, 0.2);
+    @apply text-window-glow;
+    text-shadow:
+      0 1px 10px rgba(8, 12, 18, 0.9),
+      0 0 16px rgba(232, 196, 122, 0.22);
   }
 
   .wing-exhibits .exhibit-plaque:hover .exhibit-plaque__title,
   .wing-exhibits .exhibit-plaque:focus-within .exhibit-plaque__title {
-    @apply text-parchment/85;
-    text-shadow: 0 0 16px rgba(232, 196, 122, 0.08), 0 1px 10px rgba(8, 12, 18, 0.45);
+    @apply text-parchment/90;
+    text-shadow:
+      0 1px 12px rgba(8, 12, 18, 0.95),
+      0 0 18px rgba(232, 196, 122, 0.1),
+      0 1px 22px rgba(8, 12, 18, 0.75);
     transform: translateY(-1px);
   }
 
@@ -280,11 +317,22 @@
   /* Portrait: exhibits + copy blocking */
   @media (orientation: portrait) and (max-width: 1024px) {
     .wing-map__list {
-      gap: clamp(0.85rem, 3.5vw, 1.75rem);
+      padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + clamp(1.25rem, 6vw, 2.5rem)));
+      padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + clamp(1.25rem, 6vw, 2.5rem)));
     }
 
     .wing-map__link {
-      @apply text-[0.72rem];
+      @apply text-[0.68rem] tracking-[0.14em];
+    }
+
+    .biome-room .wing-exhibits::before {
+      left: -2.5rem;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(8, 12, 18, 0.14) 25%,
+        rgba(8, 12, 18, 0.32) 100%
+      );
     }
 
     .biome-room .hero-arrival__title {
@@ -352,6 +400,10 @@
   }
 
   @media (orientation: portrait) and (max-width: 480px) {
+    .wing-map__link {
+      @apply text-[0.62rem] tracking-[0.12em];
+    }
+
     .biome-room .hero-arrival__title {
       @apply max-w-[min(18rem,88vw)];
     }

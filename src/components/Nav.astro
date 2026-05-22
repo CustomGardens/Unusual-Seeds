@@ -35,17 +35,6 @@ const isImmersive = isImmersivePath(navPath);
     <ul class="flex items-center gap-5 text-xs tracking-[0.14em] text-parchment-muted uppercase">
       <li>
         <a
-          href="/seeds"
-          class:list={[
-            "hover:text-parchment/90",
-            navPath.startsWith("/seeds") && "text-parchment",
-          ]}
-        >
-          Seeds
-        </a>
-      </li>
-      <li>
-        <a
           href="/about"
           class:list={["hover:text-parchment/90", navPath === "/about" && "text-parchment"]}
         >
