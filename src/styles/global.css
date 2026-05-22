@@ -314,9 +314,19 @@
     @apply mt-4 max-w-md pb-6 text-parchment/55;
   }
 
-  /* Portrait: exhibits + copy blocking */
+  /* Portrait / tablet: intentional tall-doorway composition (landscape unchanged below) */
   @media (orientation: portrait) and (max-width: 1024px) {
+    .nav-about:not(.text-parchment) {
+      opacity: 0.88;
+    }
+
+    .nav-about:hover,
+    .nav-about:focus-visible {
+      opacity: 1;
+    }
+
     .wing-map__list {
+      @apply max-w-[min(100%,40rem)];
       padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + clamp(1.25rem, 6vw, 2.5rem)));
       padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + clamp(1.25rem, 6vw, 2.5rem)));
     }
@@ -325,53 +335,112 @@
       @apply text-[0.68rem] tracking-[0.14em];
     }
 
-    .biome-room .wing-exhibits::before {
-      left: -2.5rem;
-      background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(8, 12, 18, 0.14) 25%,
-        rgba(8, 12, 18, 0.32) 100%
-      );
+    /* Title cluster — narrow doorway column, lifted from floor */
+    .hero-arrival__title {
+      padding-top: clamp(4.75rem, 11vh, 5.75rem);
+      padding-bottom: calc(clamp(5.5rem, 13vh, 7rem) + 6vh);
+      padding-left: clamp(1.5rem, 5.5vw, 2.5rem);
+      padding-right: clamp(1.25rem, 4vw, 2rem);
+    }
+
+    .hero-arrival:not(.biome-room) .hero-arrival__title {
+      max-width: min(18rem, 46vw);
+    }
+
+    .hero-arrival:not(.biome-room) .hero-arrival__name,
+    .hero-arrival:not(.biome-room) .hero-arrival__tagline {
+      text-shadow:
+        0 1px 14px rgba(8, 12, 18, 0.42),
+        0 0 22px rgba(8, 12, 18, 0.22);
     }
 
     .biome-room .hero-arrival__title {
-      @apply max-w-[min(20rem,68vw)];
-      padding-bottom: clamp(5rem, 12vh, 6.5rem);
-    }
-
-    .biome-room__subtitle {
-      @apply max-w-[min(17rem,62vw)] pb-4;
+      max-width: min(18rem, 46vw);
     }
 
     .biome-room__copy {
-      padding-bottom: clamp(5rem, 12vh, 6.5rem);
-      padding-right: clamp(1.25rem, 5vw, 2.25rem);
+      padding-bottom: calc(clamp(5.25rem, 13vh, 7rem) + 6vh);
+      padding-right: clamp(1.25rem, 4vw, 2rem);
     }
 
-    /* Lower-right column — never over the title block on the left */
+    .biome-room__marker {
+      text-shadow:
+        0 1px 12px rgba(8, 12, 18, 0.45),
+        0 0 18px rgba(8, 12, 18, 0.2);
+    }
+
+    .biome-room__name {
+      @apply max-w-none text-[1.28rem] sm:text-[1.35rem];
+      text-shadow:
+        0 1px 16px rgba(8, 12, 18, 0.45),
+        0 0 24px rgba(8, 12, 18, 0.24);
+    }
+
+    .biome-room__subtitle {
+      @apply max-w-[min(16rem,44vw)] pb-3 text-[0.78rem] leading-relaxed;
+      text-shadow:
+        0 1px 12px rgba(8, 12, 18, 0.42),
+        0 0 20px rgba(8, 12, 18, 0.22);
+    }
+
+    /* Lower-right museum labels — stacked numerals, ghosted legibility */
+    .biome-room .wing-exhibits::before {
+      top: -1rem;
+      bottom: -1rem;
+      left: -3rem;
+      right: -0.35rem;
+      background: linear-gradient(
+        165deg,
+        transparent 0%,
+        rgba(8, 12, 18, 0.08) 35%,
+        rgba(8, 12, 18, 0.22) 72%,
+        rgba(8, 12, 18, 0.34) 100%
+      );
+    }
+
     .biome-room .wing-exhibits {
       @apply flex flex-col justify-end;
-      top: clamp(13rem, 30vh, 17rem);
+      top: clamp(11.5rem, 26vh, 15.5rem);
       right: max(1rem, env(safe-area-inset-right, 0px));
-      bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+      bottom: calc(6.75rem + 2.5vh + env(safe-area-inset-bottom, 0px));
       left: auto;
-      max-width: min(11.5rem, 40vw);
+      max-width: min(10.25rem, 34vw);
       padding: 0 clamp(0.5rem, 2vw, 1rem) 0 0;
       transform: none;
     }
 
     .biome-room .wing-exhibits__list {
       @apply ml-auto items-end;
-      gap: clamp(0.9rem, 2.2vh, 1.35rem);
+      gap: clamp(1.05rem, 2.6vh, 1.55rem);
     }
 
     .biome-room .wing-exhibits .exhibit-plaque {
-      @apply max-w-full justify-end;
+      @apply max-w-full flex-col items-end justify-end gap-0.5;
+    }
+
+    .biome-room .wing-exhibits .exhibit-plaque__num {
+      @apply min-w-0 text-[0.62rem] tracking-[0.1em];
+      text-shadow:
+        0 1px 10px rgba(8, 12, 18, 0.92),
+        0 0 16px rgba(8, 12, 18, 0.55),
+        0 0 10px rgba(232, 196, 122, 0.12);
     }
 
     .biome-room .wing-exhibits .exhibit-plaque__body {
-      @apply items-end text-right;
+      @apply items-end gap-0 text-right;
+    }
+
+    .biome-room .wing-exhibits .exhibit-plaque__title {
+      @apply text-[0.72rem] leading-snug text-parchment/60;
+      text-shadow:
+        0 1px 12px rgba(8, 12, 18, 0.95),
+        0 1px 22px rgba(8, 12, 18, 0.78),
+        0 0 20px rgba(8, 12, 18, 0.42);
+    }
+
+    .biome-room .wing-exhibits .exhibit-plaque:hover .exhibit-plaque__title,
+    .biome-room .wing-exhibits .exhibit-plaque:focus-within .exhibit-plaque__title {
+      @apply text-parchment/80;
     }
 
     .worlds-room__image {
@@ -387,7 +456,7 @@
     }
 
     .wander-room .hero-arrival__title {
-      padding-left: clamp(1.75rem, 8vw, 3rem);
+      padding-left: clamp(1.5rem, 5.5vw, 2.5rem);
     }
 
     .futures-room__image {
@@ -404,14 +473,23 @@
       @apply text-[0.62rem] tracking-[0.12em];
     }
 
+    .hero-arrival__title {
+      padding-bottom: calc(clamp(5.25rem, 12vh, 6.5rem) + 5vh);
+    }
+
+    .hero-arrival:not(.biome-room) .hero-arrival__title,
     .biome-room .hero-arrival__title {
-      @apply max-w-[min(18rem,88vw)];
+      max-width: min(17rem, 48vw);
+    }
+
+    .biome-room__subtitle {
+      max-width: min(15rem, 46vw);
     }
 
     .biome-room .wing-exhibits {
       top: auto;
-      bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
-      max-width: min(10.5rem, 46vw);
+      bottom: calc(6.5rem + 2vh + env(safe-area-inset-bottom, 0px));
+      max-width: min(9.5rem, 36vw);
     }
   }
 

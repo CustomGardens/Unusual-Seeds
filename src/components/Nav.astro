@@ -36,7 +36,10 @@ const isImmersive = isImmersivePath(navPath);
       <li>
         <a
           href="/about"
-          class:list={["hover:text-parchment/90", navPath === "/about" && "text-parchment"]}
+          class:list={[
+            "nav-about hover:text-parchment/90 focus-visible:text-parchment/90",
+            navPath === "/about" && "text-parchment",
+          ]}
         >
           About
         </a>
